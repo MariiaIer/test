@@ -1,4 +1,4 @@
-$(document).ready(function () {
+document.addEventListener('DOMContentLoaded', () => {
 
   // Product gallery
 
@@ -25,20 +25,21 @@ $(document).ready(function () {
 
   // Sizes panel
 
-  $(".js-sidebar-open").on('click', function () {
-    $("body").addClass("modal-view");
+  const sidebarOpenBtn = document.querySelector('.js-sidebar-open');
+  const sizeRecipient = document.querySelector('.js-size-recipient');
+  const bodyElement = document.querySelector('body');
+
+  sidebarOpenBtn.addEventListener('click', () => {
+    bodyElement.classList.add('modal-view');
   });
 
-  $(document).on('click', function (event) {
-    if (event.target.tagName.toLowerCase() === 'body' ||
-      event.target.className.includes('js-sidebar-close')) {
-      $("body").removeClass("modal-view");
+  document.addEventListener('click', (event) => {
+    if (event.target.tagName.toLowerCase() === 'body' || event.target.className.includes('js-sidebar-close')) {
+      bodyElement.classList.remove('modal-view');
+    }
+    if (event.target.tagName.toLowerCase() === 'label') {
+      sizeRecipient.innerHTML = event.target.closest('.js-size-option').dataset.size;
     }
   });
 
-  $(document).on('click', '.js-size-option', function (event) {
-    $('.js-size-recipient').text($(this).data('size'));
-  });
-
 });
-
